@@ -1,0 +1,32 @@
+[
+  {
+    "id": "policy_001",
+    "code": "FREEZE_AUTH",
+    "title": "Card Freeze Authorization Policy",
+    "contentText": "Agents may freeze cards for suspicious transactions under $1000. Team leads required for amounts $1000+. All freezes require OTP verification except in emergency fraud situations. Customer must be notified within 2 hours."
+  },
+  {
+    "id": "policy_002",
+    "code": "DISPUTE_LIMITS", 
+    "title": "Dispute Amount Limitations",
+    "contentText": "Disputes over $5000 require supervisor approval. Provisional credit limited to $2500 without additional verification. High-risk customers have dispute limits reduced by 50%."
+  },
+  {
+    "id": "policy_003",
+    "code": "BUSINESS_HOURS",
+    "title": "Business Hours Operations",
+    "contentText": "High-risk actions outside business hours (Mon-Fri 9-5 EST) require additional approval. Weekend fraud actions limited to card freezes only. Overnight shifts have reduced authorization limits."
+  },
+  {
+    "id": "policy_004",
+    "code": "OTP_REQUIREMENTS",
+    "title": "OTP Verification Requirements", 
+    "contentText": "OTP required for: Card freezes, Dispute creation >$1000, Customer data modifications, Account unlocks. OTP valid for 5 minutes. Maximum 3 attempts before lockout."
+  },
+  {
+    "id": "policy_005",
+    "code": "ESCALATION_RULES",
+    "title": "Case Escalation Rules",
+    "contentText": "Escalate to supervisor: Risk score >80 with confidence <60%, Customer complaints about false positives, Repeated fraud patterns, Cross-border transactions >$2000. Escalation must occur within 30 minutes of case assignment."
+  }
+]

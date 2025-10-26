@@ -1,0 +1,50 @@
+[
+  {
+    "id": "card_001",
+    "customerId": "cust_001",
+    "last4": "1234",
+    "network": "VISA",
+    "status": "ACTIVE",
+    "createdAt": "2024-01-15T10:30:00Z"
+  },
+  {
+    "id": "card_002",
+    "customerId": "cust_002", 
+    "last4": "5678",
+    "network": "MASTERCARD",
+    "status": "ACTIVE",
+    "createdAt": "2024-02-20T15:00:00Z"
+  },
+  {
+    "id": "card_003",
+    "customerId": "cust_003",
+    "last4": "9012",
+    "network": "VISA",
+    "status": "ACTIVE", 
+    "createdAt": "2024-03-10T09:45:00Z"
+  },
+  {
+    "id": "card_004",
+    "customerId": "cust_004",
+    "last4": "3456",
+    "network": "AMEX",
+    "status": "ACTIVE",
+    "createdAt": "2024-04-05T17:15:00Z"
+  },
+  {
+    "id": "card_005",
+    "customerId": "cust_005",
+    "last4": "7890", 
+    "network": "VISA",
+    "status": "FROZEN",
+    "createdAt": "2024-05-12T11:50:00Z"
+  },
+  {
+    "id": "card_006",
+    "customerId": "cust_006",
+    "last4": "2345",
+    "network": "RUPAY",
+    "status": "ACTIVE",
+    "createdAt": "2024-06-01T09:30:00Z"
+  }
+]

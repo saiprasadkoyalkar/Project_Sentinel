@@ -1,0 +1,41 @@
+{
+  "name": "sentinel-support",
+  "version": "1.0.0",
+  "description": "Full-Stack Fintech Case Resolution with Multi-Agent Automation",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:api\" \"npm run dev:web\"",
+    "dev:api": "cd api && npm run dev",
+    "dev:web": "cd web && npm run dev",
+    "build": "npm run build:api && npm run build:web",
+    "build:api": "cd api && npm run build",
+    "build:web": "cd web && npm run build",
+    "start": "npm run start:api",
+    "start:api": "cd api && npm start",
+    "start:web": "cd web && npm run preview",
+    "test": "npm run test:api && npm run test:web",
+    "test:api": "cd api && npm test",
+    "test:web": "cd web && npm test",
+    "eval": "cd api && npm run eval",
+    "setup": "npm run setup:api && npm run setup:web && npm run seed",
+    "setup:api": "cd api && npm install",
+    "setup:web": "cd web && npm install",
+    "seed": "cd api && npm run seed",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "workspaces": [
+    "api",
+    "web"
+  ],
+  "author": "Sentinel Team",
+  "license": "MIT",
+  "dependencies": {
+    "multer": "^2.0.2",
+    "xlsx": "^0.18.5"
+  }
+}

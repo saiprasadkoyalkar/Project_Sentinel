@@ -1,0 +1,38 @@
+[
+  {
+    "id": "acc_001",
+    "customerId": "cust_001",
+    "balanceCents": 125000,
+    "currency": "USD"
+  },
+  {
+    "id": "acc_002",
+    "customerId": "cust_002",
+    "balanceCents": 89500,
+    "currency": "USD"
+  },
+  {
+    "id": "acc_003", 
+    "customerId": "cust_003",
+    "balanceCents": 45000,
+    "currency": "USD"
+  },
+  {
+    "id": "acc_004",
+    "customerId": "cust_004",
+    "balanceCents": 78250,
+    "currency": "USD"
+  },
+  {
+    "id": "acc_005",
+    "customerId": "cust_005",
+    "balanceCents": 23450,
+    "currency": "USD"
+  },
+  {
+    "id": "acc_006",
+    "customerId": "cust_006",
+    "balanceCents": 100000,
+    "currency": "USD"
+  }
+]

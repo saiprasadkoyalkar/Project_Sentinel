@@ -1,0 +1,178 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Customer {
+  id          String   @id @default(cuid())
+  name        String
+  emailMasked String   @map("email_masked")
+  kycLevel    String   @map("kyc_level")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  // Relations
+  cards        Card[]
+  accounts     Account[]
+  transactions Transaction[]
+  alerts       Alert[]
+  cases        Case[]
+
+  @@map("customers")
+}
+
+model Card {
+  id         String   @id @default(cuid())
+  customerId String   @map("customer_id")
+  last4      String
+  network    String
+  status     String
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  // Relations
+  customer     Customer      @relation(fields: [customerId], references: [id])
+  transactions Transaction[]
+
+  @@map("cards")
+}
+
+model Account {
+  id           String @id @default(cuid())
+  customerId   String @map("customer_id")
+  balanceCents Int    @map("balance_cents")
+  currency     String
+
+  // Relations
+  customer Customer @relation(fields: [customerId], references: [id])
+
+  @@map("accounts")
+}
+
+model Transaction {
+  id          String   @id @default(cuid())
+  customerId  String   @map("customer_id")
+  cardId      String   @map("card_id")
+  mcc         String
+  merchant    String
+  amountCents Int      @map("amount_cents")
+  currency    String
+  ts          DateTime
+  deviceId    String?  @map("device_id")
+  country     String?
+  city        String?
+
+  // Relations
+  customer Customer @relation(fields: [customerId], references: [id])
+  card     Card     @relation(fields: [cardId], references: [id])
+  alerts   Alert[]
+  cases    Case[]
+
+  @@index([customerId, ts(sort: Desc)])
+  @@index([merchant])
+  @@index([mcc])
+  @@index([customerId, merchant])
+  @@map("transactions")
+}
+
+model Alert {
+  id           String   @id @default(cuid())
+  customerId   String   @map("customer_id")
+  suspectTxnId String   @map("suspect_txn_id")
+  createdAt    DateTime @default(now()) @map("created_at")
+  risk         String
+  status       String
+
+  // Relations
+  customer    Customer     @relation(fields: [customerId], references: [id])
+  suspectTxn  Transaction  @relation(fields: [suspectTxnId], references: [id])
+  triageRuns  TriageRun[]
+
+  @@map("alerts")
+}
+
+model Case {
+  id         String   @id @default(cuid())
+  customerId String   @map("customer_id")
+  txnId      String?  @map("txn_id")
+  type       String
+  status     String
+  reasonCode String?  @map("reason_code")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  // Relations
+  customer   Customer    @relation(fields: [customerId], references: [id])
+  txn        Transaction? @relation(fields: [txnId], references: [id])
+  events     CaseEvent[]
+
+  @@map("cases")
+}
+
+model CaseEvent {
+  id          String   @id @default(cuid())
+  caseId      String   @map("case_id")
+  ts          DateTime @default(now())
+  actor       String
+  action      String
+  payloadJson Json     @map("payload_json")
+
+  // Relations
+  case Case @relation(fields: [caseId], references: [id])
+
+  @@map("case_events")
+}
+
+model TriageRun {
+  id            String    @id @default(cuid())
+  alertId       String    @map("alert_id")
+  startedAt     DateTime  @default(now()) @map("started_at")
+  endedAt       DateTime? @map("ended_at")
+  risk          String?
+  reasons       Json?
+  fallbackUsed  Boolean   @default(false) @map("fallback_used")
+  latencyMs     Int?      @map("latency_ms")
+
+  // Relations
+  alert   Alert        @relation(fields: [alertId], references: [id])
+  traces  AgentTrace[]
+
+  @@map("triage_runs")
+}
+
+model AgentTrace {
+  runId      String @map("run_id")
+  seq        Int
+  step       String
+  ok         Boolean
+  durationMs Int    @map("duration_ms")
+  detailJson Json   @map("detail_json")
+
+  // Relations
+  run TriageRun @relation(fields: [runId], references: [id])
+
+  @@id([runId, seq])
+  @@map("agent_traces")
+}
+
+model KbDoc {
+  id          String @id @default(cuid())
+  title       String
+  anchor      String
+  contentText String @map("content_text")
+
+  @@map("kb_docs")
+}
+
+model Policy {
+  id          String @id @default(cuid())
+  code        String @unique
+  title       String
+  contentText String @map("content_text")
+
+  @@map("policies")
+}

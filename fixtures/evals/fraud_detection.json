@@ -1,0 +1,54 @@
+[
+  {
+    "id": "eval_fraud_001",
+    "testCase": "High velocity transaction detection",
+    "description": "Customer makes 5 transactions within 10 minutes",
+    "input": {
+      "customerId": "cust_001",
+      "transactions": [
+        {"amount": 50.00, "merchant": "Coffee Shop", "timestamp": "2024-10-25T10:00:00Z"},
+        {"amount": 25.00, "merchant": "Gas Station", "timestamp": "2024-10-25T10:02:00Z"},
+        {"amount": 100.00, "merchant": "Grocery Store", "timestamp": "2024-10-25T10:05:00Z"},
+        {"amount": 75.00, "merchant": "Restaurant", "timestamp": "2024-10-25T10:07:00Z"},
+        {"amount": 200.00, "merchant": "Electronics Store", "timestamp": "2024-10-25T10:09:00Z"}
+      ]
+    },
+    "expectedOutput": {
+      "riskScore": "high",
+      "alertTriggered": true,
+      "alertType": "velocity_check",
+      "reasoning": "5 transactions in 10 minutes exceeds normal pattern"
+    },
+    "category": "fraud_detection",
+    "priority": "high"
+  },
+  {
+    "id": "eval_fraud_002", 
+    "testCase": "Geographic anomaly detection",
+    "description": "Transaction in unusual location for customer",
+    "input": {
+      "customerId": "cust_001",
+      "transaction": {
+        "amount": 500.00,
+        "merchant": "Hotel Booking",
+        "location": "Tokyo, Japan", 
+        "timestamp": "2024-10-25T14:30:00Z"
+      },
+      "customerProfile": {
+        "usualLocations": ["New York, US", "Boston, US"],
+        "lastTransaction": {
+          "location": "New York, US",
+          "timestamp": "2024-10-25T08:00:00Z"
+        }
+      }
+    },
+    "expectedOutput": {
+      "riskScore": "high",
+      "alertTriggered": true,
+      "alertType": "geographic_anomaly", 
+      "reasoning": "Transaction 6,800 miles from last known location within 6.5 hours"
+    },
+    "category": "fraud_detection",
+    "priority": "high"
+  }
+]

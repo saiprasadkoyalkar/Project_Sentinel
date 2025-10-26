@@ -1,0 +1,92 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: sentinel-postgres
+    environment:
+      POSTGRES_DB: sentinel
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init-user.sh:/docker-entrypoint-initdb.d/init-user.sh
+    networks:
+      - sentinel-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d sentinel"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: sentinel-redis
+    ports:
+      - "6380:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - sentinel-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: sentinel-api
+    ports:
+      - "3001:3001"
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: postgresql://sentinel:sentinel123@postgres:5432/sentinel
+      REDIS_URL: redis://redis:6379
+      PORT: 3001
+      API_KEY: sentinel-api-key-dev
+      JWT_SECRET: sentinel-jwt-secret-dev
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./fixtures:/app/fixtures:ro
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3001/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    container_name: sentinel-web
+    ports:
+      - "3000:3000"
+    environment:
+      VITE_API_URL: http://localhost:3001
+      VITE_API_KEY: sentinel-api-key-dev
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  sentinel-network:
+    driver: bridge
+    name: sentinel-network

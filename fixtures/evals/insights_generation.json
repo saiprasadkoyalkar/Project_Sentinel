@@ -1,0 +1,59 @@
+[
+  {
+    "id": "eval_insights_001",
+    "testCase": "Customer spending pattern analysis",
+    "description": "Generate insights for customer with varied spending",
+    "input": {
+      "customerId": "cust_001",
+      "timeRange": "last_30_days",
+      "includeCategories": ["spending_patterns", "risk_indicators", "recommendations"]
+    },
+    "expectedOutput": {
+      "spendingPatterns": {
+        "avgMonthlySpend": 2500.00,
+        "topCategories": ["Groceries", "Gas", "Restaurants"],
+        "unusualActivity": false
+      },
+      "riskIndicators": {
+        "riskScore": "low",
+        "flags": []
+      },
+      "recommendations": {
+        "cardUpgrade": false,
+        "creditIncrease": true,
+        "alertSettings": "normal"
+      }
+    },
+    "category": "insights_generation",
+    "priority": "medium"
+  },
+  {
+    "id": "eval_insights_002",
+    "testCase": "Risk scoring accuracy",
+    "description": "Accurate risk assessment for suspicious customer",
+    "input": {
+      "customerId": "cust_suspicious",
+      "recentActivity": {
+        "transactionCount": 15,
+        "newDevices": 3,
+        "foreignTransactions": 8,
+        "amountVariance": "high"
+      }
+    },
+    "expectedOutput": {
+      "riskScore": "high",
+      "riskFactors": [
+        "multiple_new_devices",
+        "foreign_transaction_spike", 
+        "spending_pattern_change"
+      ],
+      "recommendedActions": [
+        "require_additional_verification",
+        "monitor_closely",
+        "consider_card_restrictions"
+      ]
+    },
+    "category": "insights_generation", 
+    "priority": "high"
+  }
+]

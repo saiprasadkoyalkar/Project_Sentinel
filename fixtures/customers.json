@@ -1,0 +1,45 @@
+[
+  {
+    "id": "cust_001",
+    "name": "John Smith",
+    "emailMasked": "jo***@example.com",
+    "kycLevel": "verified",
+    "createdAt": "2024-01-15T10:00:00Z"
+  },
+  {
+    "id": "cust_002", 
+    "name": "Sarah Johnson",
+    "emailMasked": "sa***@example.com",
+    "kycLevel": "verified",
+    "createdAt": "2024-02-20T14:30:00Z"
+  },
+  {
+    "id": "cust_003",
+    "name": "Michael Brown",
+    "emailMasked": "mi***@example.com", 
+    "kycLevel": "pending",
+    "createdAt": "2024-03-10T09:15:00Z"
+  },
+  {
+    "id": "cust_004",
+    "name": "Emily Davis",
+    "emailMasked": "em***@example.com",
+    "kycLevel": "verified", 
+    "createdAt": "2024-04-05T16:45:00Z"
+  },
+  {
+    "id": "cust_005",
+    "name": "David Wilson",
+    "emailMasked": "da***@example.com",
+    "kycLevel": "restricted",
+    "createdAt": "2024-05-12T11:20:00Z"
+  },
+  {
+    "id": "cust_006",
+    "name": "Saiprasad",
+    "emailMasked": "sa***@example.com",
+    "kycLevel": "verified",
+    "createdAt": "2024-06-01T09:00:00Z"
+  }
+
+]

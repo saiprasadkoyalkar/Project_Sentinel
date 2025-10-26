@@ -1,0 +1,32 @@
+[
+  {
+    "id": "kb_001",
+    "title": "Transaction Velocity Guidelines",
+    "anchor": "velocity-guidelines",
+    "contentText": "When analyzing transaction velocity, consider the following factors: 1) Historical spending patterns for the customer 2) Time of day and frequency 3) Merchant categories 4) Geographic location. A velocity score above 75 indicates high risk and may warrant immediate investigation. For customers with established patterns, allow for 20% deviation before flagging. New customers should be monitored more closely with a 10% deviation threshold."
+  },
+  {
+    "id": "kb_002", 
+    "title": "Dispute Processing Procedures",
+    "anchor": "dispute-procedures",
+    "contentText": "Dispute processing follows these steps: 1) Initial assessment within 24 hours 2) Customer notification and provisional credit if applicable 3) Merchant investigation period (5-10 business days) 4) Final determination. Reason codes: 10.4 (Other Fraud), 4855 (Goods/Services Not Provided), 4837 (No Cardholder Authorization). Always document evidence and maintain chain of custody for fraud cases."
+  },
+  {
+    "id": "kb_003",
+    "title": "Device Authentication Protocols", 
+    "anchor": "device-auth",
+    "contentText": "Device fingerprinting includes: Browser characteristics, screen resolution, timezone, installed plugins, IP geolocation. A device change combined with high-value transactions increases risk score by 25 points. Trusted devices are established after 30 days of consistent usage patterns. New device transactions above $500 require additional verification steps."
+  },
+  {
+    "id": "kb_004",
+    "title": "Merchant Risk Assessment",
+    "anchor": "merchant-risk", 
+    "contentText": "High-risk merchant categories (MCCs): 5960 (Direct Marketing), 6051 (Non-Financial Institutions), 7995 (Gambling), 4829 (Money Transfer). These categories require enhanced monitoring. New merchants in customer transaction history increase risk by 15 points. Cross-reference with global merchant blacklists before processing."
+  },
+  {
+    "id": "kb_005",
+    "title": "Card Freeze Procedures",
+    "anchor": "card-freeze",
+    "contentText": "Card freeze authority: Agents can freeze for transactions under $1000, Team leads required for higher amounts. OTP verification required for all freezes unless emergency circumstances. Customer notification must occur within 2 hours via SMS and email. Unfreeze requires manager approval and customer verification via phone call with security questions."
+  }
+]
